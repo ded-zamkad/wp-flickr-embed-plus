@@ -1,8 +1,8 @@
 <?php
 
 interface WPFlickrEmbed_Constants {
-    const FLICKR_API_KEY = '3f02754ebb3a1fb2d79f62200d3744e0';
-    const FLICKR_SECRET = '4af3a6dcd49af4a7';
+    const FLICKR_API_KEY = 'ceefe870fb00a38adb6c9d19e540d362';
+    const FLICKR_SECRET = 'd6fe4682b57b51cb';
 
     const FLICKR_USER_FULLNAME = 'flickr_user_fullname';
     const FLICKR_USER_NAME = 'flickr_username';

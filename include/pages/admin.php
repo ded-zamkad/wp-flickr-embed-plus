@@ -11,7 +11,7 @@ $messages = $admin->messages;
 ?>
 
 <div class="wrap wp-flickr-embed-admin">
-    <h2><?php _e('Wordpress Flickr Embed', 'wp-flickr-embed') ?></h2>
+    <h2><?php _e('Wordpress Flickr Embed', 'wp-flickr-embed-plus') ?></h2>
 
     <?php if(!empty($errors)): ?>
     <div id="message" class="error fade"><p><strong><?php echo join('<br />', $errors) ?></strong></p></div>

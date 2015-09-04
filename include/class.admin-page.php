@@ -7,7 +7,7 @@
 class WpFlickrEmbed_Admin_Page implements WPFlickrEmbed_Constants {
     private $_errors = array();
     private $_messages  = array();
-    private $_slug = 'wp-flickr-embed';
+    private $_slug = 'wp-flickr-embed-plus';
 
 
 
