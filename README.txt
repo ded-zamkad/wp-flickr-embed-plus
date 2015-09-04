@@ -15,13 +15,16 @@ Wordpress Flickr Embed Plus is a Wordpress plugin that provides an interactive i
 
 This is a fork of the (https://wordpress.org/plugins/wp-flickr-embed/) plugin for Wordpress and provides numerous bug fixes and enhancements over the original.
 
+= New Features =
+* Supports EXIF metadata as label for photo
+
 = Features =
 * Search for an select any public photo or a private one from your photostream (requires Flickr authorization).
 * Sort search results by date taken or date posted
 * Insert a photo anywhere in your post, choosing its title, size and how it should be aligned to the text.
 * Link the photo back to its Flickr page or to a different-sized version of itself.
 * Supports Lightbox and Lightview popups.
-* Supports EXIF metadata as label for photo
+
 
 Source on Github: https://github.com/ded-zamkad/wp-flickr-embed-plus
 
@@ -62,5 +65,5 @@ Yes you can. You will still be able to insert any public photo available on Flic
 == Changelog ==
 
 
-= 1.0.0 (Sep 5, 2015) =
+= 1.0 (Sep 5, 2015) =
 * First version
