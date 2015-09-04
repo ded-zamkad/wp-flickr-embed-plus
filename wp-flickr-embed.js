@@ -23,6 +23,7 @@ function WpFlickrEmbed() {
   self.photos = {};
   self.flickr_url = '';
   self.title_text = '';
+  self.exif = '';
 
 
 
@@ -78,6 +79,90 @@ function WpFlickrEmbed() {
   };
 
 
+  self.flickrGetPhotoExif = function(photo_id) {
+    var params = {};
+    params.photo_id = photo_id;
+    params.method = 'flickr.photos.getExif';
+    params.time = (new Date()).getTime();
+
+    self.getFlickrData(params, self.callbackPhotoExif);
+  };
+
+//  <div class="Exif" style="font-size: 80%;"><span class="exif_tag" style="color: #ea1d2c;">EXIF</span> 1/160 sec, f/5.6, 32 mm, ISO 400, 2013:08:17 19:46:42, Canon EOS 5D Mark II, EF24-70mm f/2.8L USM</div>
+
+  self.callbackPhotoExif = function(data) {
+    if (! data) return self.error(data);
+    if (! data.photo) return self.error(data);
+    var list = data.photo.exif;
+    if (! list) return self.error(data);
+    if (! list.length) return self.error(data);
+
+    //console.log("---+++EXIF+++---"); 
+	
+	var divExif = '<div class="Exif" style="font-size: 80%;"><span class="Exif-tag">EXIF</span>';
+  	  
+	
+	var exifStr="";
+	var exifExposure="";
+	var exifAperture="";
+	var exifISO="";
+	var exifFocalLength="";
+	var exifCreateDate="";
+	var exifLens="";
+	var exifCamera="";
+	
+    for (i=0; i<list.length; ++i) {
+		//console.log(list[i]);
+		//console.log("Raw:", list[i].raw);
+		if (list[i].tag == "FNumber"){
+			exifAperture=list[i].clean._content;
+			//console.log("exifAperture:", exifAperture);
+		}
+		if (list[i].tag == "ExposureTime"){
+		console.log("Raw:", list[i].raw);
+		console.log("Clean:", list[i].clean);
+			exifExposure=list[i].raw._content;
+			//console.log("exifExposure:", exifExposure);
+		}
+		if (list[i].tag == "ISO"){
+			exifISO=list[i].raw._content;
+			//console.log("exifISO:", exifISO);
+		}
+		if (list[i].tag == "FocalLength"){
+			exifFocalLength=list[i].raw._content;
+			//console.log("exifFocal:", exifFocalLength);
+		}
+		if (list[i].tag == "CreateDate"){
+			exifCreateDate=list[i].raw._content;
+			//console.log("exifCreateDate:", exifCreateDate);
+		}
+		if (list[i].tag == "Lens"){
+			exifLens=list[i].raw._content;
+			//console.log("exifCreateDate:", exifLens);
+		}
+		if (list[i].tag == "Model"){
+			exifCamera=list[i].raw._content;
+			//console.log("exifCreateDate:", exifCamera);
+		}
+    }
+	exifStr=exifExposure + ', ' + exifAperture + ', ' + exifFocalLength + ', ISO ' + exifISO + ', ' + exifCreateDate + ', ' + exifCamera + ', ' + exifLens;
+	
+	  console.log("exifStr:", exifStr);
+	  divExif=divExif + ' ' + exifStr + '</div>';
+	  
+	  //console.log(divExif);
+	  //self.exif=$(divExif).html();
+	  self.exif=divExif;
+	  console.log(self.exif);
+
+ 
+    $('#loader').hide();
+    $('#put_dialog').show();
+    $('#put_background').show();
+  };
+  
+  
+  
   self.flickrGetPhotoSizes = function(photo_id) {
     var params = {};
     params.photo_id = photo_id;
@@ -373,6 +458,9 @@ function WpFlickrEmbed() {
     self.title_text = self.photos[photo_id].title;
 
     self.flickrGetPhotoSizes(photo_id);
+	self.flickrGetPhotoExif(photo_id);
+
+	
 
     if(!$('#select_alignment :radio:checked').size()) {
       $('#alignment_none').attr('checked', 'checked');
@@ -443,11 +531,17 @@ function WpFlickrEmbed() {
 
     a.append(img);
     p.append(a);
+	
+	//console.log(p.html());
 
     $('#put_dialog').hide();
     $('#put_background').hide();
 
-    self.send_to_editor(p.html(), $('#continue_insert:checked').size() == 0);
+	if($('#exif:checked').size() == 0){
+		self.exif='';
+	}
+	
+    self.send_to_editor(p.html() + self.exif, $('#continue_insert:checked').size() == 0);
   };
 
 
