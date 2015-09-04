@@ -2,7 +2,7 @@
 /*
 Plugin Name: Wordpress Flickr Embed Plus
 Plugin URI: https://github.com/ded-zamkad/wp-flickr-embed-plus
-Description: Insert Flickr images into your post using an interactive popup, launched from the visual editor toolbar.
+Description: Insert Flickr images into your post using an interactive popup, launched from the visual editor toolbar. Extended version based on wp-flickr-embed plugin by Ramesh Nair 
 Author: Ded Zamkad
 Version: 1.0.0
 Author URI: http://ded_zamkad.livejournal.com
