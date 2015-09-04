@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Wordpress Flickr Embed
-Plugin URI: https://github.com/hiddentao/wp-flickr-embed
+Plugin Name: Wordpress Flickr Embed Plus
+Plugin URI: https://github.com/ded-zamkad/wp-flickr-embed-plus
 Description: Insert Flickr images into your post using an interactive popup, launched from the visual editor toolbar.
-Author: Ramesh Nair
-Version: 1.2.3
-Author URI: http://hiddentao.com
+Author: Ded Zamkad
+Version: 1.0.0
+Author URI: http://ded_zamkad.livejournal.com
 */
 
 
@@ -32,7 +32,7 @@ spl_autoload_register('wp_flickr_embed_class_loader');
 
 
 class WpFlickrEmbed implements WPFlickrEmbed_Constants {
-    private $_slug = 'wp-flickr-embed';
+    private $_slug = 'wp-flickr-embed-plus';
 
     var $pluginURI = null;
     var $settings = array();
@@ -207,20 +207,20 @@ class WpFlickrEmbed implements WPFlickrEmbed_Constants {
         $media_upload_iframe_src = "media-upload.php?post_id=$uploading_iframe_ID";
 
         $wp_flickr_embed_iframe_src = apply_filters('wp_flickr_embed_iframe_src', "$media_upload_iframe_src&amp;type=flickr&amp;tab=flickr");
-        $wp_flickr_embed_title = __('Add Flickr photo', 'wp-flickr-embed');
+        $wp_flickr_embed_title = __('Add Flickr photo', 'wp-flickr-embed-plus');
 
         echo "<a href=\"{$wp_flickr_embed_iframe_src}&amp;TB_iframe=true&amp;height=500&amp;width=640\" class=\"thickbox\" title=\"$wp_flickr_embed_title\"><img src=\"{$this->pluginURI}/images/media-flickr.png\" alt=\"$wp_flickr_embed_title\" /></a>";
     }
 
     function modifyMediaTab($tabs) {
         return array(
-            'flickr' =>  __('Flickr photo', 'wp-flickr-embed')
+            'flickr' =>  __('Flickr photo', 'wp-flickr-embed-plus')
         );
     }
 
     function addAdminMenu() {
         if (function_exists('add_options_page')) {
-            add_options_page(__('WP Flickr Embed', 'wp-flickr-embed'), __('WP Flickr Embed', 'wp-flickr-embed'), 8, $this->pagesDir.'/admin.php');
+            add_options_page(__('WP Flickr Embed Plus', 'wp-flickr-embed-plus'), __('WP Flickr Embed Plus', 'wp-flickr-embed-plus'), 8, $this->pagesDir.'/admin.php');
         }
     }
 
@@ -340,7 +340,7 @@ function media_upload_type_flickr() {
     global $wpFlickrEmbed;
 
     if ($wpFlickrEmbed->isDisabled()) {
-        echo '<p>' . __('The Wordpress Flickr Embed plugin has been disabled. Please visit the plugin\'s options page.', 'wp-flickr-embed') . '</p>';
+        echo '<p>' . __('The Wordpress Flickr Embed Plus plugin has been disabled. Please visit the plugin\'s options page.', 'wp-flickr-embed-plus') . '</p>';
     } else {
         require(dirname(__FILE__) .'/wp-flickr-embed-upload-frame.php');
     }
